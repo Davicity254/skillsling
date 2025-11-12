@@ -1,0 +1,145 @@
+/* ---------- Decorative circular badge behind headings & nav ---------- */
+.header-badge {
+  position: relative;
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  z-index: 1;
+}
+
+.header-badge::before {
+  content: "";
+  position: absolute;
+  left: -18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(100,100,255,0.16), rgba(100,100,255,0.06) 40%, transparent 60%);
+  filter: blur(6px);
+  z-index: -1;
+  transition: transform 300ms ease, opacity 300ms ease;
+  opacity: 0.95;
+}
+
+/* Slight movement on hover (header/title) */
+.header-badge:hover::before {
+  transform: translateY(-50%) scale(1.08);
+  opacity: 1;
+}
+
+/* smaller variant for nav links */
+.nav-badge {
+  position: relative;
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
+  border-radius: 9999px;
+}
+
+.nav-badge::after {
+  content: "";
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(100,149,255,0.20), rgba(99,102,241,0.06));
+  box-shadow: 0 6px 18px rgba(99,102,241,0.06);
+  z-index: -1;
+  transition: transform 250ms ease;
+}
+
+/* active nav grows badge */
+.nav-badge.active::after,
+.nav-badge:hover::after {
+  transform: translateY(-50%) scale(1.25);
+}
+
+/* ---------- Unique buttons with animated gradient ring ---------- */
+.btn-primary {
+  position: relative;
+  display: inline-block;
+  padding: 0.6em 1.1em;
+  border-radius: 10px;
+  background: linear-gradient(180deg,#0b72ff 0%, #0463d6 100%);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  box-shadow: 0 6px 18px rgba(3, 102, 214, 0.18);
+  overflow: visible;
+}
+
+/* decorative animated ring */
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 14px;
+  background: conic-gradient(from 90deg, rgba(99,102,241,0.18), rgba(124,58,237,0.10), rgba(56,189,248,0.08), rgba(99,102,241,0.12));
+  filter: blur(8px);
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 240ms ease, transform 240ms ease;
+  z-index: -1;
+}
+
+/* hover: show ring and lift button */
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(3, 102, 214, 0.22);
+}
+.btn-primary:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* focus ring for accessibility */
+.btn-primary:focus {
+  box-shadow: 0 0 0 4px rgba(13,110,253,0.14);
+}
+
+/* secondary outline button */
+.btn-ghost {
+  padding: 0.5em 0.9em;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: inherit;
+  transition: background 160ms ease, transform 160ms ease;
+}
+.btn-ghost:hover { transform: translateY(-2px); background: rgba(255,255,255,0.04); }
+
+/* ---------- small floating/pulse accent for icons ---------- */
+.pulse {
+  position: relative;
+}
+.pulse::after {
+  content: "";
+  position: absolute;
+  right: -6px;
+  top: -6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(99,102,241,0.95);
+  box-shadow: 0 0 0 rgba(99,102,241,0.6);
+  animation: pulse 1800ms infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(0.6); opacity: 0.9; box-shadow: 0 0 0 0 rgba(99,102,241,0.6); }
+  70% { transform: scale(1.5); opacity: 0.35; box-shadow: 0 0 0 8px rgba(99,102,241,0.06); }
+  100% { transform: scale(1.6); opacity: 0; box-shadow: 0 0 0 12px rgba(99,102,241,0); }
+}
+
+/* ---------- make badges friendly on small screens ---------- */
+@media (max-width: 640px) {
+  .header-badge::before { left: -12px; width: 30px; height: 30px; }
+  .nav-badge::after { right: -6px; width: 14px; height: 14px;}
+  .btn-primary::before { inset: -4px; border-radius: 12px; }
+}
