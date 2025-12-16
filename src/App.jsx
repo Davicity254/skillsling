@@ -193,7 +193,7 @@ function AuthForm({ onAuth }) {
                     className={`text-sm px-3 py-2 text-left rounded border ${services.includes(s) ? 'bg-blue-600 text-white border-blue-600' : 'bg-white'}`}
                   >
                     {s}
-                  </button>
+                  </ button>
                 ))}
               </div>
 
